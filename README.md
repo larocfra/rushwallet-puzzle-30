@@ -42,27 +42,7 @@ The puzzle uses a short promotional video featuring a character named "Dmitri" w
 
 ---
 
-## 🔑 How Brainwallets Work
 
-All 30 wallets are generated the same way — SHA-256 hash of the passphrase → **uncompressed** Bitcoin address:
-
-```python
-import hashlib, ecdsa, base58
-
-def brainwallet(phrase):
-    priv = hashlib.sha256(phrase.encode('utf-8')).digest()
-    sk = ecdsa.SigningKey.from_string(priv, curve=ecdsa.SECP256k1)
-    vk = sk.get_verifying_key()
-    x = vk.pubkey.point.x()
-    y = vk.pubkey.point.y()
-    pub = b'\x04' + x.to_bytes(32, 'big') + y.to_bytes(32, 'big')  # UNCOMPRESSED
-    sha = hashlib.sha256(pub).digest()
-    rip = hashlib.new('ripemd160')
-    rip.update(sha)
-    h = b'\x00' + rip.digest()
-    chk = hashlib.sha256(hashlib.sha256(h).digest()).digest()[:4]
-    return base58.b58encode(h + chk).decode()
-```
 
 > ⚠️ **Must use uncompressed keys.** Compressed keys generate a different address.
 
@@ -93,33 +73,10 @@ Faint text is embedded in specific frames, only visible in the archive version. 
 ```
 frames/
   found/      ← Annotated frames showing confirmed clues
-  unsolved/   ← Frames believed to contain hidden clues — NEED YOUR HELP HERE
 video/        ← Original archive video (or see Releases if too large)
 all_frames.zip
 findings.md   ← Full list of all 30 wallets and what's been eliminated
 ```
-
----
-
-## 🆘 Where We Need Help
-
-### 1. 🔥 The 16 Coins (frame ~01575, ~52 seconds)
-A crowned dancing woman is surrounded by exactly **16 Bitcoin coins**. We believe subliminal text is embedded on these coins (same as the `5784623964023 X2` technique) but have not been able to read it clearly yet.
-
-See: `frames/unsolved/frame_01575_crowned_woman.png`
-
-### 2. Blue Rectangle on the Wall
-The office/living room wall has a blue rectangle that appears empty. It may contain faint text only readable in the full-resolution archive version.
-
-See: `frames/unsolved/frame_blue_rectangle.png`
-
-### 3. "SLOGAN" Pointer Under the K Bag
-A visible text element literally reading `SLOGAN` appears on the wall under the KryptoKit bag logo. This is almost certainly pointing to KryptoKit's actual tagline from their 2014 website. All known slogans have been tested. If you have access to a Wayback Machine snapshot of `kryptokit.com` from late 2014, the exact homepage tagline text could be the key.
-
-### 4. Wallets #13, #23, #26
-Three wallets were claimed but their passphrases were never publicly shared. If you know what these were, please open an issue!
-
----
 
 ## 🤝 How to Contribute
 
