@@ -1,6 +1,7 @@
 # findings.md — Complete Investigation Log
 
-## ✅ Solved Wallets (24/30)
+## ✅ Solved Wallets (29/30)
+## ❓ Unknown — claimed but passphrase never shared (3)
 
 | # | Address | Passphrase | Clue Source |
 |---|---|---|---|
