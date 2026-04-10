@@ -71,8 +71,7 @@ Faint text is embedded in specific frames, only visible in the archive version. 
 ## 🗂️ This Repo
 
 ```
-frames/
-  found/      ← Annotated frames showing confirmed clues
+found/        ← Annotated frames showing confirmed clues
 video/        ← Original archive video (or see Releases if too large)
 all_frames.zip
 findings.md   ← Full list of all 30 wallets and what's been eliminated
